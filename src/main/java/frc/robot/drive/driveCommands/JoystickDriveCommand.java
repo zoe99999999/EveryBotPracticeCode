@@ -24,10 +24,11 @@ public class JoystickDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double steerWeight; //TODO: set steerweight to drivercontrollerleft joystick x value
-        double speed; //TODO: set steerweight to drivercontrollerleft joystick -y value
+        double steerWeight = driverController.getLeftX();
+        double speed = -driverController.getLeftY();
+        driveSubsystem.drive(speed, steerWeight);
     }
-    
+
     @Override
     public void end(boolean interrupted) {}
 
