@@ -23,8 +23,8 @@ public class DriveSubsystem extends SubsystemBase{
     }
 
     public void drive(double speed, double steerWeight){
-        double leftSpeed = speed * (1 + steerWeight);
-        double rightSpeed = speed * (1 - steerWeight);
+        double leftSpeed = speed * (1 - steerWeight);
+        double rightSpeed = speed * (1 + steerWeight);
         if (leftSpeed>1){
             leftSpeed = 1;
         }
