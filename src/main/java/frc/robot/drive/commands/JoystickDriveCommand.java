@@ -1,14 +1,11 @@
-package frc.robot.drive.driveCommands;
+package frc.robot.drive.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.drive.DriveSubsystem;
-
 public class JoystickDriveCommand extends CommandBase {
-
     XboxController driverController;
     DriveSubsystem driveSubsystem;
-
     public JoystickDriveCommand(DriveSubsystem driveSubsystem, XboxController driverController){
 
         this.driveSubsystem = driveSubsystem;
@@ -17,10 +14,7 @@ public class JoystickDriveCommand extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        // TODO Auto-generated method stub
-        super.initialize();
-    }
+    public void initialize() {}
 
     @Override
     public void execute() {
