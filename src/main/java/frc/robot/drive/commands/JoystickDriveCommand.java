@@ -7,7 +7,8 @@ public class JoystickDriveCommand extends CommandBase {
     XboxController driverController;
     DriveSubsystem driveSubsystem;
     public JoystickDriveCommand(DriveSubsystem driveSubsystem, XboxController driverController){
-
+        
+        addRequirements(driveSubsystem);
         this.driveSubsystem = driveSubsystem;
         this.driverController = driverController;
         
@@ -18,7 +19,7 @@ public class JoystickDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double steerWeight = driverController.getLeftX();
+        double steerWeight = driverController.getRightX();
         double speed = -driverController.getLeftY();
         driveSubsystem.drive(speed, steerWeight);
     }

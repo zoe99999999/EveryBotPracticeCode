@@ -18,13 +18,13 @@ public class DriveSubsystem extends SubsystemBase{
         driveMoterL2.set(ControlMode.PercentOutput, speed);
     }
     private void setRightMotor(double speed){
-        driveMoterR1.set(ControlMode.PercentOutput, speed);
-        driveMoterR2.set(ControlMode.PercentOutput, speed);
+        driveMoterR1.set(ControlMode.PercentOutput, -speed);
+        driveMoterR2.set(ControlMode.PercentOutput, -speed);
     }
 
     public void drive(double speed, double steerWeight){
-        double leftSpeed = speed * (1 - steerWeight);
-        double rightSpeed = speed * (1 + steerWeight);
+        double leftSpeed = speed + steerWeight;
+        double rightSpeed = speed - steerWeight;
         if (leftSpeed>1){
             leftSpeed = 1;
         }
