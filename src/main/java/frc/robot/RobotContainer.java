@@ -7,16 +7,18 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.arm.ArmSubsystem;
 import frc.robot.arm.commands.RunArmCommand;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.commands.JoystickDriveCommand;
+import frc.robot.roller.RollerSubsystem;
+import frc.robot.roller.commands.IntakeCommand;
 
 public class RobotContainer {
   DriveSubsystem driveSubsystem = new DriveSubsystem();
   ArmSubsystem armSubsystem = new ArmSubsystem();
+  RollerSubsystem rollerSubsystem = new RollerSubsystem();
   XboxController driverController = new XboxController(0);
   XboxController operatorController = new XboxController(1);
 
@@ -31,8 +33,8 @@ public class RobotContainer {
 
   private void configureBindings() {
     
-    new Trigger(() -> driverController.getLeftBumper()).onTrue(new RunArmCommand(armSubsystem, driverController, 0.75));
-    new Trigger(() -> (driverController.getLeftTriggerAxis() > 0.5)).onTrue(new RunArmCommand(armSubsystem, driverController, -0.5));
+    new Trigger(() -> (Math.abs(operatorController.getLeftY())>0.1)).whileTrue(new RunArmCommand(armSubsystem, () -> (operatorController.getLeftY()*0.5)));
+    new Trigger(() -> (operatorController.getRightTriggerAxis()>0.5)).whileTrue(new IntakeCommand(rollerSubsystem, () -> (-0.5)));
 
   }
 
