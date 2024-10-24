@@ -25,12 +25,15 @@ public class RobotContainer {
   ArmSubsystem armSubsystem = new ArmSubsystem();
   ArmControl armControl = new ArmControl(armSubsystem, operatorController);
   EncoderPrint encoderPrint = new EncoderPrint(armSubsystem);
+  
+  SparkMaxxingI2cEncoder sparkmaxxer = new SparkMaxxingI2cEncoder(0, 0x06, 0, 0, 0);
   Robot robot;
   public RobotContainer(Robot robot) {
     driveSubsystem.setDefaultCommand(new DriveSeparate(driveSubsystem, driveController));
     this.robot = robot;
-    robot.addPeriodic(()-> {System.out.println("Encoder reads " + armSubsystem.getEncoder());}, 0);
-    robot.addPeriodic(()-> {System.out.println("Spud reads " + operatorController.getLeftY());}, 0);
+    robot.addPeriodic(()-> {System.out.println("SparkMaxxer Sez: " + sparkmaxxer.getRad());}, 0);
+    // robot.addPeriodic(()-> {System.out.println("Encoder reads " + armSubsystem.getEncoder());}, 0);
+    // robot.addPeriodic(()-> {System.out.println("Spud reads " + operatorController.getLeftY());}, 0);
     configureBindings();
   }
 
